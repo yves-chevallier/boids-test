@@ -9,13 +9,14 @@ struct MobileGenerator {
 
     std::uniform_real_distribution<> height;
     std::uniform_real_distribution<> width;
+    std::uniform_real_distribution<> speed;
     std::random_device rd;
     std::mt19937 gen;
 
-    MobileGenerator(Flock &flock) : flock(flock), height(0,flock.height), width(0,flock.width), gen(rd()) {}
-    MobileGenerator(MobileGenerator const&m) : flock(m.flock), height(m.height), width(m.width), gen(rd()) {}
+    MobileGenerator(Flock &flock) : flock(flock), height(0,flock.height), width(0,flock.width), speed(-1.f, 1.f), gen(rd()) {}
+    MobileGenerator(MobileGenerator const&m) : flock(m.flock), height(m.height), width(m.width), speed(m.speed), gen(rd()) {}
 
-    auto operator() () { return Mobile(flock, Vector2<float>(width(gen), height(gen))); }
+    auto operator() () { return Mobile(flock, Vector2<float>(width(gen), height(gen)), Vector2<float>(speed(gen), speed(gen))); }
 };
 
 Flock::Flock(float width, float height) :

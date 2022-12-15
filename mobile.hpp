@@ -15,7 +15,7 @@ class Mobile {
     vector_type position;
     vector_type velocity;
 
-    Mobile(Flock &flock, vector_type position);
+    Mobile(Flock &flock, vector_type position, vector_type speed);
 
     float angle();
     float speed();

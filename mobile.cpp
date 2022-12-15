@@ -1,9 +1,9 @@
 #include "mobile.hpp"
 #include "flock.hpp"
 
-Mobile::Mobile(Flock &flock, vector_type position)
-    : flock(flock), position(position), velocity(0, 0), is_wrap(false), max_velocity(0.1),
-      max_history(100)
+Mobile::Mobile(Flock &flock, vector_type position, vector_type speed)
+    : position(position), velocity(speed), is_wrap(false), max_velocity(0.1),
+      max_history(100), flock(flock)
 {
     history.set_capacity(max_history);
 }
@@ -32,8 +32,8 @@ void Mobile::bounce(float margin, float turnFactor)
 {
     if (position.x < margin) velocity.x += turnFactor;
     if (position.y < margin) velocity.y += turnFactor;
-    if (position.x > 1.0 - margin) velocity.x -= turnFactor;
-    if (position.y > 1.0 - margin) velocity.y -= turnFactor;
+    if (position.x > flock.width - margin) velocity.x -= turnFactor;
+    if (position.y > flock.height- margin) velocity.y -= turnFactor;
 }
 
 /**
@@ -42,11 +42,11 @@ void Mobile::bounce(float margin, float turnFactor)
  */
 void Mobile::wrap()
 {
-    if (position.x < 0) position.x += 1.0;
-    if (position.y < 0) position.y += 1.0;
+    if (position.x < 0) position.x += flock.width;
+    if (position.y < 0) position.y += flock.height;
 
-    if (position.x > 1.0) position.x -= 1.0;
-    if (position.y > 1.0) position.y -= 1.0;
+    if (position.x > flock.width) position.x -= 1.0;
+    if (position.y > flock.height) position.y -= 1.0;
 }
 
 
