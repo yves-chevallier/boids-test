@@ -67,3 +67,15 @@ void Mobile::update()
 
     history.push_back(position);
 }
+
+// Add a small random velocity to the Mobile
+void Mobile::roam() {
+    float chance = rand() / (float)RAND_MAX;
+    if (chance > 0.80) {
+        float step = 0.2;
+        float vx = (rand() / (float)RAND_MAX - 0.5) * step;
+        float vy = (rand() / (float)RAND_MAX - 0.5) * step;
+        velocity += Vector2<float>(vx, vy);
+        velocity.limit(max_velocity);
+    }
+}

@@ -25,6 +25,7 @@ class Mobile {
 
     void bounce(float margin, float turnFactor);
     void wrap();
+    void roam();
 
     void update();
 

@@ -11,7 +11,7 @@
 #define HEIGHT 600
 #define FRAMERATE 60
 
-sf::VertexArray boidShape(int x, int y, float angle) {
+void boidShape(int x, int y, float angle, sf::VertexArray &array) {
     int boidWidth = 3;
     int boidHeight = 10;
 
@@ -27,34 +27,36 @@ sf::VertexArray boidShape(int x, int y, float angle) {
 
     // set the angle
     sf::Transform transform;
+    angle -= 90;
     transform.rotate(angle, (v2.position.x + v3.position.x) / 2,
-                     v1.position.y - 5);
+                     v1.position.y - boidHeight / 2);
     v1.position = transform.transformPoint(v1.position);
     v2.position = transform.transformPoint(v2.position);
     v3.position = transform.transformPoint(v3.position);
 
     // appending them into vertex array
-    sf::VertexArray array(sf::Triangles, 3);
     array.append(v1);
     array.append(v2);
     array.append(v3);
-    return array;
 }
 
 void draw(sf::RenderWindow& window, Flock &flock) {
+    sf::VertexArray boids(sf::Triangles, 3);
+
     for (auto& mobile : flock.flock) {
-        sf::VertexArray shape = boidShape(mobile.position.x, mobile.position.y,
-                                          mobile.angle() * 180 / M_PI);
-        window.draw(shape);
+        boidShape(mobile.position.x, mobile.position.y,
+                                          mobile.angle() * 180 / M_PI, boids);
+        window.draw(boids);
     }
 }
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "BOIDS");
-
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 4.0;
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "BOIDS", sf::Style::Close, settings);
     // Create mobiles
     Flock flock(WIDTH, HEIGHT);
-    flock.generate(400);
+    flock.generate(200);
 
     // Time management
     sf::Clock clock;
