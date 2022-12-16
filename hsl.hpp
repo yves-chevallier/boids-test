@@ -5,6 +5,24 @@
 #include <iomanip>
 #include <iostream>
 
+sf::Color hex2color(const std::string& hexcolor)
+{
+    sf::Color color = sf::Color::Black;
+    if (hexcolor.size() == 7) // #ffffff
+    {
+        color.r = strtoul(hexcolor.substr(1, 2).c_str(), NULL, 16);
+        color.g = strtoul(hexcolor.substr(3, 2).c_str(), NULL, 16);
+        color.b = strtoul(hexcolor.substr(5, 2).c_str(), NULL, 16);
+    }
+    else if (hexcolor.size() == 4) // #fff
+    {
+        color.r = strtoul(hexcolor.substr(1, 1).c_str(), NULL, 16) * 17;
+        color.g = strtoul(hexcolor.substr(2, 1).c_str(), NULL, 16) * 17;
+        color.b = strtoul(hexcolor.substr(3, 1).c_str(), NULL, 16) * 17;
+    }
+    return color;
+}
+
 struct HSL {
     double hue;
     double saturation;

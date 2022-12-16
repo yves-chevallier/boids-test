@@ -29,12 +29,10 @@ class Mobile {
 
     void update();
 
+    boost::circular_buffer<vector_type> history;
    protected:
     bool is_wrap;
     float max_velocity;
-
-    boost::circular_buffer<vector_type> history;
-    size_t max_history;
 
     Flock &flock;
 };

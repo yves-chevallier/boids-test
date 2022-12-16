@@ -3,10 +3,9 @@
 #include "flock.hpp"
 
 Mobile::Mobile(Flock &flock, vector_type position, vector_type speed)
-    : position(position), velocity(speed), is_wrap(false), max_velocity(0.1),
-      max_history(100), flock(flock)
+    : position(position), velocity(speed), history(100), is_wrap(false), max_velocity(0.1),
+      flock(flock)
 {
-    history.set_capacity(max_history);
 }
 
 float Mobile::speed()

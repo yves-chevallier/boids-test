@@ -7,7 +7,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 all: $(EXEC)
 
-$(EXEC): $(OBJS)
+$(EXEC): $(OBJS) sfml-widgets/lib/libsfml-widgets.a
 	$(CC) $^ $(LDFLAGS)
 
 %.o: %.cpp
