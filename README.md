@@ -26,6 +26,18 @@
 
 - Tail length
 
+- [ ] Vector
+  - [ ] To String
+  - [ ] Random from value
+  - [ ] Resolution, width = 1.0, -1.0
+  - [ ] Square distance
+  - [ ] Dot product
+  - [ ] Zero set to zero
+  - [ ] Normalize
+
+## Ideas
+
+- [ ] Candidate, only get N candidates from whole population (faster): Accuracy
 
 ## References
 

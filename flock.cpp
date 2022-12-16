@@ -29,9 +29,6 @@ void Flock::generate(size_t count) {
 
 void Flock::update() {
         std::for_each(flock.begin(), flock.end(), [&](Mobile& mobile) {
-            mobile.bounce(margin, turnFactor);
-            mobile.roam();
             mobile.update();
-            mobile.velocity.limit(maxVelocity);
         });
     }

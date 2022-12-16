@@ -1,3 +1,4 @@
+#include <boost/circular_buffer.hpp>
 #include "mobile.hpp"
 #include "flock.hpp"
 
@@ -37,7 +38,7 @@ void Mobile::bounce(float margin, float turnFactor)
 }
 
 /**
- * The Mobile suddently appear at the opposite of the map
+ * The Mobile suddenly appear at the opposite of the map
  * if it crosses the boundaries.
  */
 void Mobile::wrap()
@@ -52,18 +53,17 @@ void Mobile::wrap()
 
 void Mobile::update()
 {
-    if (is_wrap)
+    if (flock.wrap)
         wrap();
     else
         bounce(speed() * 5.0, speed() / 5.0);
 
-    // Update position
-    velocity.limit(max_velocity);
-    position += velocity;
+    // Random moves
+    roam();
 
-    // Record previous position
-    if (history.size() > max_history)
-        history.pop_front();
+    // Update position
+    position += velocity;
+    velocity.limit(max_velocity);
 
     history.push_back(position);
 }

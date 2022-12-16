@@ -1,7 +1,7 @@
 EXEC = boids
-CC = g++
-CFLAGS = -std=c++17 -c -Wall
-LDFLAGS = -std=c++17 -o $(EXEC) -ltgui -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
+CC = clang++
+CFLAGS = -std=c++2a -c -Wall
+LDFLAGS = -std=c++2a -o $(EXEC) -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 

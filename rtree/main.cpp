@@ -95,31 +95,14 @@ int main() {
             foo.selected = true;
         }
 
-        window.clear(sf::Color::Green);
-        sf::CircleShape circle(50);
-        circle.setPosition(100,100);
-        sf::VertexArray objects(sf::TriangleStrip, circle.getPointCount());
-        for (int i = 0; i < circle.getPointCount(); i++) {
-           std::cout << circle.getPoint(i).x << " " << circle.getPoint(i).y << std::endl;
-           objects.append(sf::Vector2f(circle.getPoint(i).x, circle.getPoint(i).y));
+window.clear();
+        for (auto& foo : rtree) {
+            foo.draw();
 
-        }
-        objects.setFillColor(sf::Color::Red);
-        //return 0;
+            window.draw(foo.circle);
 
-        // for (auto& foo : rtree) {
-        //     foo.draw();
-        //     circle.setPosition(foo.position.x(), foo.position.y());
-        //     for (int i = 0; i < circle.getPointCount(); ++i) {
-        //         auto p = circle.getPoint(i);
-        //         objects.append(sf::Vector2f(p.x, p.y));
-        //     }
-        for (int i = 0; i < objects.getVertexCount(); i++) {
-            objects[i].color = sf::Color::Blue;
+         }
 
-        }
-        // }
-        window.draw(objects);
         window.draw(spot);
         window.display();
     }
